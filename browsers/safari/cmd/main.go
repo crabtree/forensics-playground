@@ -8,20 +8,23 @@ import (
 	"os"
 
 	_ "github.com/mattn/go-sqlite3"
+
+	"github.com/crabtree/forensics-playground/browsers/shared/pkg/dbhelper"
+	"github.com/crabtree/forensics-playground/browsers/shared/pkg/iohelper"
 )
 
 func main() {
 	if len(os.Args) != 2 {
-		printUsageAndExit()
+		iohelper.PrintUsageAndExit()
 	}
 
 	dbFilePath := os.Args[1]
-	db, err := loadDB(dbFilePath)
-	exitOnError(err)
+	db, err := dbhelper.LoadDB(dbFilePath)
+	iohelper.ExitOnError(err)
 	defer db.Close()
 
-	rows, err := db.Query("SELECT url FROM history_items")
-	exitOnError(err)
+	rows, err := db.Query("SELECT url FROM history_items;")
+	iohelper.ExitOnError(err)
 
 	hosts := make(map[string]int)
 	for rows.Next() {
