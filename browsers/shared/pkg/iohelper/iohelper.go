@@ -6,7 +6,7 @@ import (
 )
 
 func PrintUsageAndExit() {
-	log.Fatalf("Usage: %s <path to History.db>\n", os.Args[0])
+	log.Fatalf("Usage: %s <path to database file>\n", os.Args[0])
 }
 
 func ExitOnError(err error) {
