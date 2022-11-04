@@ -10,7 +10,7 @@ func LoadDB(dbFilePath string) (*sql.DB, error) {
 	_, err := os.Stat(dbFilePath)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return nil, fmt.Errorf("Database file does not exists under path %s\n", dbFilePath)
+			return nil, fmt.Errorf("Database file does not exists under path %s", dbFilePath)
 		}
 		return nil, fmt.Errorf("An error while reading database file: %s", err)
 	}
